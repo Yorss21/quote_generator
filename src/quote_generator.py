@@ -128,23 +128,24 @@ class QuoteGenerator:
         author = quote.get('author', 'Unknown')
         category = quote.get('category', 'unknown')
         
-        return f"""
-        "{text}"
-        — {author}
-        [{category.capitalize()}]
-        """
+            return f'
+"{text}"
+
+— {author}
+[{category.capitalize()}]
+'
 
 
 def display_menu() -> None:
     """Display the main menu options."""
-    print(" " + "="*50)
+    print("" + "="*50)
     print("  QUOTE GENERATOR")
     print("="*50)
     print("1. Get a random quote")
     print("2. Get a quote by category")
     print("3. View all categories")
     print("4. Exit")
-    print(" " + "="*50)
+    print("" + "="*50)
 
 
 def main():
@@ -171,7 +172,7 @@ def main():
                 for i, cat in enumerate(categories, 1):
                     print(f"  {i}. {cat.capitalize()}")
 
-                cat_choice = input("Enter category name: ").strip()
+                cat_choice = input("\nEnter category name: ").strip()
                 clear_screen()
                 quote = generator.get_quote_by_category(cat_choice)
 
@@ -190,7 +191,7 @@ def main():
 
             elif choice == '4':
                 clear_screen()
-                print("Thanks for using Quote Generator! Stay inspired!")
+                print("Thanks for using Quote Generator! Stay inspired!\n\n")
                 break
             else:
                 clear_screen()
