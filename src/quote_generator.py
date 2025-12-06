@@ -121,7 +121,7 @@ class QuoteGenerator:
         Returns:
             A formatted string representation of the quote.
         """
-        if not quote:
+        if quote is None:
             return "No quote available."
         
         text = quote.get('text', 'Unknown quote')
