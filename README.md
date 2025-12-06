@@ -70,10 +70,10 @@ python3 src/quote_generator.py
 ---
 
 ## Project Structure
-To view the project structure, use the tree command:
+To view the project structure, use the `tree` command (excluding virtual environment):
 
 ```bash
-tree
+tree -I 'venv|__pycache__|*.pyc|.pytest_cache'
 ```
 
 **Don't have tree installed?**
