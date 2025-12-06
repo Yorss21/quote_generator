@@ -128,12 +128,12 @@ class QuoteGenerator:
         author = quote.get('author', 'Unknown')
         category = quote.get('category', 'unknown')
         
-            return f'
+        return f"""
 "{text}"
 
 — {author}
 [{category.capitalize()}]
-'
+"""
 
 
 def display_menu() -> None:
@@ -154,11 +154,11 @@ def main():
         generator = QuoteGenerator()
         clear_screen()
         print("Welcome to Quote Generator!")
-        print(f"Loaded {len(generator.quotes)} quotes.")
+        print(f"Loaded {len(generator.quotes)} quotes.\n")
 
         while True:
             display_menu()
-            choice = input("Enter your choice (1-4): ").strip()
+            choice = input("\nEnter your choice (1-4): ").strip()
 
             if choice == '1':
                 clear_screen()
@@ -168,18 +168,28 @@ def main():
             elif choice == '2':
                 clear_screen()
                 categories = generator.get_all_categories()
-                print("Available categories:")
+                print("Available categories: ")
                 for i, cat in enumerate(categories, 1):
                     print(f"  {i}. {cat.capitalize()}")
-
-                cat_choice = input("\nEnter category name: ").strip()
-                clear_screen()
-                quote = generator.get_quote_by_category(cat_choice)
-
-                if quote:
-                    print(generator.format_quote(quote))
-                else:
-                    print(f"No quotes found for category: {cat_choice}")
+                cat_input = input("Enter category number or name: ").strip()
+                # Try to parse as number first
+                selected_category = None
+                try:
+                    cat_number = int(cat_input)
+                    if 1 <= cat_number <= len(categories):
+                        selected_category = categories[cat_number - 1]
+                    else:
+                        print(f"Invalid number. Please enter a number between 1 and {len(categories)}.")
+                except ValueError:
+                    # If not a number, treat as category name
+                    selected_category = cat_input
+                if selected_category:
+                    clear_screen()
+                    quote = generator.get_quote_by_category(selected_category)
+                    if quote:
+                        print(generator.format_quote(quote))
+                    else:
+                        print(f"No quotes found for category: {selected_category}")
 
             elif choice == '3':
                 clear_screen()
